@@ -11,7 +11,9 @@ app.get("/", async (request: Request, response: Response) => {
 app.post("/courses", async (request: Request, response: Response) => {
   const { name } = request.body
 
-  await knex("courses").insert({ name })
+  // await knex("courses").insert({ name })
+
+  await knex.raw("INSERT INTO courses (name) VALUES (?)", [name])
 
   response.status(201).json()
 })
